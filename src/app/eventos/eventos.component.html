@@ -1,0 +1,306 @@
+<div
+  id="back"
+  class="z-depth-5"
+  style="
+    margin-top: 2em;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5em;
+    padding: 1em;
+  "
+>
+  <nav>
+    <div class="nav-wrapper">
+      <a class="brand-logo center">Criar um Evento:</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a routerLink="/home">Página Inicial</a></li>
+      </ul>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a (click)="logout()">Sair</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <form
+    [formGroup]="eventosForm"
+    style="padding-top: 2em; margin-left: 2em; margin-right: 2em"
+  >
+    <h4>Informações Básicas:</h4>
+    <div class="input-field">
+      <input
+        style="color: #277373"
+        type="text"
+        id="nome"
+        formControlName="nome"
+      />
+      <sup style="color: red">Obrigatório</sup>
+      <label for="nome">Nome do Evento</label>
+    </div>
+
+    <div class="input-field">
+      <h6>Data:</h6>
+      <input
+        style="color: #277373"
+        type="date"
+        id="data"
+        formControlName="data"
+      />
+      <sup style="color: red">Obrigatório</sup>
+    </div>
+
+    <div class="input-field">
+      <h6>Horário:</h6>
+      <input
+        style="color: #277373"
+        type="time"
+        id="time"
+        formControlName="horario"
+      />
+      <sup style="color: red">Obrigatório</sup>
+    </div>
+    <div class="input-field">
+      <input
+        style="color: #277373"
+        type="text"
+        id="local"
+        formControlName="local"
+      />
+      <sup style="color: red">Obrigatório</sup>
+      <label for="local">Local do Evento</label>
+    </div>
+    <div class="input-field">
+      <input
+        style="color: #277373"
+        type="text"
+        id="ingressos"
+        formControlName="ingressos"
+      />
+      <label for="ingressos">Link Para os Ingressos</label>
+      <sup style="color: red">Opcional</sup>
+    </div>
+  </form>
+
+  <form
+    [formGroup]="eventosForm"
+    style="padding-top: 2em; margin-left: 2em; margin-right: 2em"
+  >
+    <h4>Descrição do Evento:</h4>
+    <div class="file-field input-field">
+      <div id="botao" class="btn waves-effect lighten-2">
+        <span>Imagem do Evento</span>
+        <input
+          type="file"
+          name="imagem_evento"
+          #evento_imagem_template
+          (change)="pega_imagem_no_template(evento_imagem_template)"
+        />
+      </div>
+      <div class="file-path-wrapper">
+        <input
+          class="file-path validate"
+          type="text"
+          placeholder="Selecione uma imagem para o evento"
+          readonly
+        />
+      </div>
+    </div>
+    <div class="input-field">
+      <input
+        style="color: #277373"
+        type="text"
+        id="event_description"
+        formControlName="event_description"
+      />
+      <sup style="color: red">Obrigatório</sup>
+      <label for="event_description">Descrição do Evento</label>
+    </div>
+  </form>
+
+  <form
+    [formGroup]="musicasForm"
+    style="padding-top: 2em; margin-left: 2em; margin-right: 2em"
+  >
+    <h4>Músicas:</h4>
+    <sup style="color: red"
+      >Se você for adicionar uma música os três campos serão obrigátórios!</sup
+    >
+    <div class="input-field">
+      <input
+        style="color: #277373"
+        type="text"
+        id="nome"
+        formControlName="nome"
+      />
+      <label for="nome">Nome da Música</label>
+    </div>
+    <div class="input-field">
+      <input
+        style="color: #277373"
+        type="text"
+        id="autor"
+        formControlName="autor"
+      />
+      <label for="autor">Nome do Autor</label>
+    </div>
+    <div class="input-field">
+      <input
+        style="color: #277373"
+        type="text"
+        id="partitura_url"
+        formControlName="partitura_url"
+      />
+      <sup style="color: red">Somente links https!</sup>
+      <label for="partitura_url">Link da Partitura</label>
+    </div>
+    <!-- <h6 style="margin-top: 1em;">Letra da Música:</h6>
+        <div class="form-group">
+            <quill-editor 
+                #editor
+                formControlName="letra_musica"
+                [styles]="{height: '300px'}">
+            </quill-editor>
+        </div> -->
+  </form>
+
+  <form
+    style="margin-top: 1em; margin-left: 2em; margin-right: 2em"
+    (click)="adiciona_musica()"
+  >
+    <button
+      id="botao"
+      class="btn waves-effect lighten-2"
+      type="submit"
+      name="action"
+    >
+      Adicionar Música
+      <i class="material-icons right">add_circle_outline</i>
+    </button>
+  </form>
+
+  <form [formGroup]="musicasForm" style="margin-left: 2em; margin-right: 2em">
+    <ul class="collection">
+      <li *ngFor="let musica of musicas" class="collection-item">
+        Nome: {{ musica.nome }}<br />
+        Autor: {{ musica.autor }}<br />
+        <button
+          id="botao"
+          class="btn waves-effect lighten-2"
+          (click)="remove_musica(musica.nome)"
+        >
+          Remover
+          <i class="material-icons right">clear</i>
+        </button>
+      </li>
+    </ul>
+  </form>
+
+  <form
+    [formGroup]="integrantesForm"
+    style="padding-top: 2em; margin-left: 2em; margin-right: 2em"
+  >
+    <h4>Equipe do Evento:</h4>
+    <div class="file-field input-field">
+      <div id="botao" class="btn waves-effect lighten-2">
+        <span>Imagem da Equipe</span>
+        <input
+          type="file"
+          name="imagem_equipe"
+          #equipe_imagem_template
+          (change)="pega_equipe_imagem_no_template(equipe_imagem_template)"
+        />
+      </div>
+      <div class="file-path-wrapper">
+        <input
+          class="file-path validate"
+          type="text"
+          placeholder="Selecione uma imagem para a equipe"
+          readonly
+        />
+      </div>
+    </div>
+    <div class="input-field">
+      <input
+        style="color: #277373"
+        type="text"
+        id="nome"
+        formControlName="nome"
+      />
+      <label for="nome">Nome Integrante</label>
+    </div>
+  </form>
+
+  <form
+    style="margin-left: 2em; margin-right: 2em"
+    (click)="adiciona_integrante()"
+  >
+    <button
+      id="botao"
+      class="btn waves-effect lighten-2"
+      type="submit"
+      name="action"
+    >
+      Adicionar Integrante
+      <i class="material-icons right">add_circle_outline</i>
+    </button>
+  </form>
+
+  <form
+    [formGroup]="integrantesForm"
+    style="margin-left: 2em; margin-right: 2em"
+  >
+    <ul class="collection">
+      <li *ngFor="let integrante of integrantes" class="collection-item">
+        <div>
+          Nome: {{ integrante.nome }}
+          <a class="secondary-content"
+            ><i
+              (click)="remove_integrante(integrante.nome)"
+              class="material-icons"
+              >clear</i
+            ></a
+          >
+        </div>
+      </li>
+    </ul>
+  </form>
+
+  <form
+    style="
+      padding-top: 2em;
+      padding-bottom: 2em;
+      margin-left: 2em;
+      margin-right: 2em;
+    "
+    (click)="cria_evento()"
+  >
+    <button
+      id="botao"
+      class="btn waves-effect lighten-2"
+      type="submit"
+      name="action"
+    >
+      Criar Evento
+      <i class="material-icons right">send</i>
+    </button>
+  </form>
+
+  <div id="component-container">
+    <nav>
+      <div class="nav-wrapper">
+        <a class="brand-logo center">Publicaçõs Postadas:</a>
+      </div>
+    </nav>
+    <ul class="collection with-header" style="margin-top: 2em">
+      <li class="collection-item" *ngFor="let evento of eventos$ | async">
+        <div>
+          {{ evento.nome }}
+          <a class="secondary-content"
+            ><i (click)="exclui_elemento(evento.id)" class="material-icons"
+              >clear</i
+            ></a
+          >
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

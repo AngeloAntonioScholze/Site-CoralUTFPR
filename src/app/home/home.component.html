@@ -1,0 +1,86 @@
+<div
+  id="back"
+  class="z-depth-5"
+  style="
+    margin-top: 2em;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5em;
+    padding: 1em;
+  "
+>
+  <nav>
+    <div class="nav-wrapper">
+      <a class="brand-logo center">Menu:</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <div style="margin-left: 5%; margin-top: 5px">
+          <img src="logocoralbranco.png" alt="" width="200" height="20" />
+        </div>
+      </ul>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a (click)="logout()">Sair</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="section"></div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col s3">
+        <img
+          routerLink="/editor"
+          src="icone1.png"
+          alt=""
+          width="128"
+          height="170"
+        />
+      </div>
+      <div class="col s3">
+        <img
+          routerLink="/videos"
+          src="icone2.png"
+          alt=""
+          width="128"
+          height="170"
+        />
+      </div>
+      <div class="col s3">
+        <img
+          routerLink="/exerciciosMusicais"
+          src="icone3.png"
+          alt=""
+          width="128"
+          height="170"
+        />
+      </div>
+      <div class="col s3">
+        <img
+          routerLink="/eventos"
+          src="icone4.png"
+          alt=""
+          width="128"
+          height="170"
+        />
+      </div>
+      <!-- <div class="col s2">
+        <img
+          routerLink="/pesquisa"
+          src="icone5.png"
+          alt=""
+          width="128"
+          height="170"
+        />
+      </div>
+      <div class="col s2">
+        <img
+          routerLink="/inscricoes"
+          src="icone6.png"
+          alt=""
+          width="128"
+          height="170"
+        />
+      </div> -->
+    </div>
+  </div>
+</div>

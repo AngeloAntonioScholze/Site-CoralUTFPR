@@ -1,0 +1,114 @@
+<div
+  id="back"
+  class="z-depth-5"
+  style="
+    margin-top: 2em;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5em;
+    padding: 1em;
+  "
+>
+  <nav>
+    <div class="nav-wrapper">
+      <a class="brand-logo center">Edição de Vídeos:</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a routerLink="/home">Página Inicial</a></li>
+      </ul>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a (click)="logout()">Sair</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <form
+    [formGroup]="videoForm"
+    style="padding-top: 2em; margin-left: 2em; margin-right: 2em"
+  >
+    <div class="input-field">
+      <input
+        style="color: #277373"
+        type="text"
+        id="titulo"
+        formControlName="video_title"
+      />
+      <label for="nome">Título do Vídeo</label>
+    </div>
+    <div class="input-field">
+      <input
+        style="color: #277373"
+        type="text"
+        id="url"
+        formControlName="video_url"
+      />
+      <sup style="color: red">Somente links https!</sup>
+      <label for="video">Link do Vídeo</label>
+    </div>
+    <div class="file-field input-field">
+      <div id="botao" class="btn waves-effect lighten-2">
+        <span>Imagem do Vídeo</span>
+        <input
+          type="file"
+          name="imagem_editor"
+          #video_imagem_template
+          (change)="pega_imagem_no_template(video_imagem_template)"
+        />
+      </div>
+      <div class="file-path-wrapper">
+        <input
+          class="file-path validate"
+          type="text"
+          placeholder="Selecione uma imagem para o vídeo"
+          readonly
+        />
+        <sup style="color: red">Imagem HD ou superior (1366x720)</sup>
+      </div>
+    </div>
+    <div class="input-field">
+      <input
+        style="color: #277373"
+        type="text"
+        id="description"
+        formControlName="video_description"
+      />
+      <sup style="color: red">Obrigatório</sup>
+      <label for="nome">Descrição do Vídeo</label>
+      
+    </div>
+  </form>
+
+  <form
+    style="padding-bottom: 2em; margin-left: 2em; margin-right: 2em"
+    (ngSubmit)="onSubmit()"
+  >
+    <button
+      id="botao"
+      class="btn waves-effect lighten-2"
+      type="submit"
+      name="action"
+    >
+      Enviar Vídeo
+      <i class="material-icons right">send</i>
+    </button>
+  </form>
+
+  <div id="component-container">
+    <nav>
+      <div class="nav-wrapper">
+        <a class="brand-logo center">Publicações Postadas:</a>
+      </div>
+    </nav>
+    <ul class="collection with-header" style="margin-top: 2em">
+      <li class="collection-item" *ngFor="let video of videos$ | async">
+        <div>
+          {{ video.name }}
+          <a class="secondary-content"
+            ><i (click)="exclui_elemento(video.id)" class="material-icons"
+              >clear</i
+            ></a
+          >
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

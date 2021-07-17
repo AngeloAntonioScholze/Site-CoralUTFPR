@@ -1,0 +1,23 @@
+<div style="text-align: center; margin-top:1em; margin-left: 10%; margin-right: 10%; padding:1em ">
+  <img src="logocoralutfpr.png" alt="" width="256" height="256">
+</div>
+<div *ngIf="afAuth.user | async as user; else showLogin">
+  <router-outlet></router-outlet>
+</div>
+<ng-template #showLogin >
+  <div id="back" class="z-depth-5" style="margin-top:3em; margin-left: 30%; margin-right: 30%; padding:1em " >
+    <form [formGroup]="loginForm" (ngSubmit)="login()" style="margin-left: 5%; margin-right: 5%; padding-bottom:2em" id="login-form">
+      <div class="input-field">
+        <input style="color: #69bfa7" type="email" id="loginEmail" formControlName="loginEmail" >
+        <label for="login-email">Endereço de E-mail</label>
+      </div>
+      <div class="input-field">
+        <input style="color: #69bfa7" type="password" id="loginPassword" formControlName="loginPassword">
+        <label for="login-password">Senha</label>
+      </div>
+      <button id="botao" class="btn waves-effect lighten-2" style="margin-top: 2em; width: 100%; " type="submit" name="action">
+          Entrar
+      </button>
+    </form>
+  </div>
+</ng-template>
